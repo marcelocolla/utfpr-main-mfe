@@ -9,10 +9,6 @@ const { ModuleFederationPlugin } = container
 
 const config: Configuration = {
   entry: './src/index.tsx',
-  output: {
-    publicPath: 'auto',
-    clean: true,
-  },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     modules: ['../src', 'node_modules'],

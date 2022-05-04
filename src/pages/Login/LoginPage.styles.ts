@@ -57,6 +57,7 @@ export const Content = styled.div`
   height: 55%;
   padding: 5.4rem 5rem 4rem;
   position: relative;
+  box-sizing: border-box;
 
   @media (max-height: 568px) {
     padding-bottom: 2rem;

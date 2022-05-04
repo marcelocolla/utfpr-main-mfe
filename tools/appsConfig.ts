@@ -1,6 +1,9 @@
+import { SHARED_DOMAIN_DEFAULT } from './environment'
 import { ModuleFederationRegisterApps } from './registerApps.types'
 
-const sharedDomain = process.env.REACT_APP_SHARED_DOMAIN || 'utfpr.edu.br/mfe'
+const initialsharedDomain = process.env.WEBPACK_SERVE ? SHARED_DOMAIN_DEFAULT : 'utfpr.edu.br/mfe'
+
+const sharedDomain = process.env.REACT_APP_SHARED_DOMAIN || initialsharedDomain
 
 const appsConfig: ModuleFederationRegisterApps = {
   profileMFE: {

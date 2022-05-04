@@ -1,4 +1,9 @@
-import { HotModuleReplacementPlugin, Configuration, EnvironmentPlugin } from 'webpack'
+import {
+  ProvidePlugin,
+  HotModuleReplacementPlugin,
+  Configuration,
+  EnvironmentPlugin,
+} from 'webpack'
 import merge from 'webpack-merge'
 
 import commonConfig from './webpack.common'
@@ -24,7 +29,13 @@ const devConfig: ConfigurationDev = {
     publicPath: `http://localhost:${port}/`,
     clean: true,
   },
-  plugins: [new EnvironmentPlugin(envLocal), new HotModuleReplacementPlugin()],
+  plugins: [
+    new ProvidePlugin({
+      process: 'process/browser',
+    }),
+    new EnvironmentPlugin(envLocal),
+    new HotModuleReplacementPlugin(),
+  ],
 }
 
 export default merge(commonConfig, devConfig)
