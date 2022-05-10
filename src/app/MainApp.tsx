@@ -1,7 +1,7 @@
-import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
 
-import RoutesApp from "./RoutesApp";
+import RoutesApp from './RoutesApp'
 
 const MainApp = (): JSX.Element => {
   return (
@@ -10,7 +10,7 @@ const MainApp = (): JSX.Element => {
         <RoutesApp />
       </BrowserRouter>
     </React.StrictMode>
-  );
-};
+  )
+}
 
-export default MainApp;
+export default MainApp

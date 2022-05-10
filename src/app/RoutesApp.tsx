@@ -3,12 +3,8 @@ import { Switch, Route, RouteProps } from 'react-router-dom'
 
 import { getRoutesMap } from './RoutesMap'
 
-type RoutesAppProps = {
-  basename?: string
-}
-
-const RoutesApp = ({ basename = '' }: RoutesAppProps): JSX.Element => {
-  const findRoutes = React.useCallback(() => getRoutesMap(basename), [basename])
+const RoutesApp = (): JSX.Element => {
+  const findRoutes = React.useCallback(() => getRoutesMap(), [])
 
   const routes = findRoutes()
 
