@@ -7,6 +7,24 @@ import appsConfig from '../tools/appsConfig'
 
 const { ModuleFederationPlugin } = container
 
+const remotes = moduleFederationRegisterApps(appsConfig)
+
+const shared = {
+  ...packageJson.dependencies,
+  react: {
+    singleton: true,
+    eager: true,
+  },
+  'react-dom': {
+    singleton: true,
+    eager: true,
+  },
+  'react-router-dom': {
+    singleton: true,
+    eager: true,
+  },
+}
+
 const config: Configuration = {
   entry: './src/index.tsx',
   resolve: {
@@ -31,26 +49,9 @@ const config: Configuration = {
     new ModuleFederationPlugin({
       name: 'utfpr_main_mfe',
       filename: 'remoteEntry.js',
-      library: {
-        type: 'var',
-        name: 'utfpr_main_mfe',
-      },
-      remotes: moduleFederationRegisterApps(appsConfig),
-      shared: {
-        ...packageJson.dependencies,
-        react: {
-          singleton: true,
-          eager: true,
-        },
-        'react-dom': {
-          singleton: true,
-          eager: true,
-        },
-        'react-router-dom': {
-          singleton: true,
-          eager: true,
-        },
-      },
+      library: undefined,
+      remotes,
+      shared,
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',

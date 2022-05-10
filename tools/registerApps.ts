@@ -3,14 +3,14 @@ import { ModuleFederationRegisterApps, ModuleFederationRemotes } from './registe
 export function moduleFederationRegisterApps(
   apps: ModuleFederationRegisterApps,
 ): ModuleFederationRemotes {
-  const keys = Object.keys(apps)
+  const configApps = Object.keys(apps)
 
   const remotes: ModuleFederationRemotes = {}
 
-  keys.forEach((key) => {
-    const mfe = apps[key]
+  configApps.forEach((appname) => {
+    const mfe = apps[appname]
 
-    if (mfe && mfe.enabled) {
+    if (mfe?.enabled) {
       remotes[mfe.localName] = `${mfe.remoteName}@${mfe.url}`
     }
   })
