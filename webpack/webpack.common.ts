@@ -7,8 +7,6 @@ import appsConfig from '../tools/appsConfig'
 
 const { ModuleFederationPlugin } = container
 
-const remotes = moduleFederationRegisterApps(appsConfig)
-
 const shared = {
   ...packageJson.dependencies,
   react: {
@@ -50,7 +48,7 @@ const config: Configuration = {
       name: 'utfpr_main_mfe',
       filename: 'remoteEntry.js',
       library: undefined,
-      remotes,
+      remotes: moduleFederationRegisterApps(appsConfig),
       shared,
     }),
     new HtmlWebpackPlugin({

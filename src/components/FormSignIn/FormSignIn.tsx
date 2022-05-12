@@ -2,6 +2,7 @@ import React from 'react'
 import { Formik, FormikHelpers } from 'formik'
 import { useHistory } from 'react-router-dom'
 
+import useUserStore from 'shared/utfpr-core-shared-mfe/UserStore'
 import { PROFILE } from 'constants/routes'
 import { SignInForm } from 'types/signIn'
 import { FormSignInFields } from 'components/FormSignInFields'
@@ -17,13 +18,16 @@ export const FormSignIn = () => {
     password: '',
   }
 
+  const { updateUser } = useUserStore()
+
   async function handleSubmit(values: SignInForm, actions: FormikHelpers<SignInForm>) {
     try {
       const result = await signIn(values)
 
-      history.replace(PROFILE)
-
       console.log('>>> sign in result', result.data)
+
+      updateUser(result.data)
+      history.replace(PROFILE)
     } catch (err) {
       console.log('>>> sign in error', err)
 

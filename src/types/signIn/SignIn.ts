@@ -1,4 +1,4 @@
-import { Teacher } from 'types/user'
+import { Person, UserGeneric } from 'types/user/Person'
 
 export type SignInForm = {
   email: string
@@ -12,5 +12,8 @@ export type SignInPayload = {
 
 export type SignInResponse = {
   token: string
-  professor?: Teacher
+  pessoa?: Person
+  professor?: UserGeneric
+  deseg?: UserGeneric
+  vigilante?: UserGeneric
 }
