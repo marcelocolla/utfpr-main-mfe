@@ -1,16 +1,16 @@
-export type Person = {
+export interface Person {
   id_pessoa: number
-  id_departamento?: number
   tipo_usuario: number
   nome_pessoa: string
   email: string
   codigo_barra: string
 }
 
-export type UserGeneric = {
-  senha: string
+export interface UserGeneric {
+  id_pessoa: string
   matricula: string
-  Pessoa: Person
+  id_deseg?: string
+  id_departamento?: number
 }
 
 export interface UserState {
