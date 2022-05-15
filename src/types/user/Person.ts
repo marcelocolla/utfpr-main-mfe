@@ -1,6 +1,5 @@
 export interface Person {
   id_pessoa: number
-  id_departamento?: number
   tipo_usuario: number
   nome_pessoa: string
   email: string
@@ -8,7 +7,8 @@ export interface Person {
 }
 
 export interface UserGeneric {
-  senha: string
+  id_pessoa: number
   matricula: string
-  Pessoa: Person
+  id_deseg?: number
+  id_departamento?: number
 }

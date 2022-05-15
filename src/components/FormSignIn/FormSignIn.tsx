@@ -24,8 +24,6 @@ export const FormSignIn = () => {
     try {
       const result = await signIn(values)
 
-      console.log('>>> sign in result', result.data)
-
       updateUser(result.data)
       history.replace(PROFILE)
     } catch (err) {

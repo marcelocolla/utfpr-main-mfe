@@ -1,17 +1,4 @@
-export interface Person {
-  id_pessoa: number
-  tipo_usuario: number
-  nome_pessoa: string
-  email: string
-  codigo_barra: string
-}
-
-export interface UserGeneric {
-  id_pessoa: string
-  matricula: string
-  id_deseg?: string
-  id_departamento?: number
-}
+import { Person, UserGeneric } from 'types/user/Person'
 
 export interface UserState {
   token: string
