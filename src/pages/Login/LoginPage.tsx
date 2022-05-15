@@ -12,6 +12,7 @@ export const LoginPage = React.memo((): JSX.Element => {
         <Logo width="106" height="126" />
         <span>Login</span>
       </Header>
+
       <Content>
         <FormSignIn />
       </Content>

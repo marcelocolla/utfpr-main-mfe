@@ -28,7 +28,7 @@ export const FormSignInFields = ({ isSubmitting }: FormSignInFieldsProps) => (
       <strong>Esqueceu a senha?</strong>
     </FormBody>
 
-    <FormFooter mt="6rem">
+    <FormFooter mt="4rem">
       <Button disabled={isSubmitting} loading={isSubmitting} name="loginButton">
         Entrar
       </Button>

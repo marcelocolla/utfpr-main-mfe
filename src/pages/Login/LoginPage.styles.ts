@@ -11,7 +11,7 @@ export const LoginWrapper = styled.div`
 
 export const Header = styled.div`
   width: 100%;
-  height: 36.7rem;
+  min-height: 40vh;
 
   background-color: #fff;
   border-bottom-left-radius: 3rem;
@@ -22,8 +22,6 @@ export const Header = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: flex-end;
-
-  gap: 20%;
 
   span {
     padding-bottom: 1.2rem;
