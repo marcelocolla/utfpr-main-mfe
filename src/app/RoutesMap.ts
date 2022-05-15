@@ -6,16 +6,15 @@ import { SIGN_IN, PROFILE } from 'constants/routes'
 const LoginPageLazy = React.lazy(() => import('pages/Login'))
 const ProfileRoutesLazy = React.lazy(() => import('shared/utfpr-profile-mfe/ProfileRoutes'))
 
-export const getRoutesMap = (basename = ''): RouteProps[] => {
+export const getRoutesMap = (): RouteProps[] => {
   return [
     {
       exact: true,
-      path: [`${basename}/`, `${basename}/${SIGN_IN}`],
+      path: ['/', SIGN_IN],
       component: LoginPageLazy,
     },
     {
-      exact: true,
-      path: `${basename}/${PROFILE}`,
+      path: PROFILE,
       component: ProfileRoutesLazy,
     },
   ]

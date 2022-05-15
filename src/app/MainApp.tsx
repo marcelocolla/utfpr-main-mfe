@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Switch } from 'react-router-dom'
 
 import RoutesApp from './RoutesApp'
 
@@ -7,7 +7,9 @@ const MainApp = (): JSX.Element => {
   return (
     <React.StrictMode>
       <BrowserRouter>
-        <RoutesApp />
+        <Switch>
+          <RoutesApp />
+        </Switch>
       </BrowserRouter>
     </React.StrictMode>
   )

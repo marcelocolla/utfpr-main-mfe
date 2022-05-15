@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, RouteProps } from 'react-router-dom'
+import { Route, RouteProps } from 'react-router-dom'
 
 import { getRoutesMap } from './RoutesMap'
 
@@ -10,11 +10,9 @@ const RoutesApp = (): JSX.Element => {
 
   return (
     <React.Suspense fallback="Carregando...">
-      <Switch>
-        {routes.map((route: RouteProps) => (
-          <Route key={route.path?.toString()} {...route} />
-        ))}
-      </Switch>
+      {routes.map((route: RouteProps) => (
+        <Route key={route.path?.toString()} {...route} />
+      ))}
     </React.Suspense>
   )
 }
