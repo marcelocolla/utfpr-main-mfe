@@ -1,11 +1,10 @@
-import { SHARED_DOMAIN_DEFAULT } from './environment'
-import { ModuleFederationRegisterApps } from './registerApps.types'
+import { ModuleRegisterApps } from '@utfprfabricadesoftware/utfpr-tools-react'
 
-const initialsharedDomain = process.env.WEBPACK_SERVE ? SHARED_DOMAIN_DEFAULT : 'utfpr.edu.br/mfe'
+const initialsharedDomain = process.env.WEBPACK_SERVE ? 'netlify.app' : 'utfpr.edu.br/mfe'
 
 const sharedDomain = process.env.REACT_APP_SHARED_DOMAIN || initialsharedDomain
 
-const appsConfig: ModuleFederationRegisterApps = {
+const appsConfig: ModuleRegisterApps = {
   coreSharedMFE: {
     enabled: true,
     localName: 'utfpr-core-shared-mfe',

@@ -1,30 +1,14 @@
-import { Configuration, container } from 'webpack'
+import { Configuration } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-import packageJson from '../package.json'
-import { moduleFederationRegisterApps } from '../tools/registerApps'
-import appsConfig from '../tools/appsConfig'
-
-const { ModuleFederationPlugin } = container
-
-const shared = {
-  ...packageJson.dependencies,
-  react: {
-    singleton: true,
-    eager: true,
-  },
-  'react-dom': {
-    singleton: true,
-    eager: true,
-  },
-  'react-router-dom': {
-    singleton: true,
-    eager: true,
-  },
-}
+import moduleFederation from './moduleFederation'
 
 const config: Configuration = {
   entry: './src/index.tsx',
+  output: {
+    publicPath: 'auto',
+    clean: true,
+  },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     modules: ['../src', 'node_modules'],
@@ -41,16 +25,14 @@ const config: Configuration = {
           },
         },
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
-    new ModuleFederationPlugin({
-      name: 'utfpr_main_mfe',
-      filename: 'remoteEntry.js',
-      library: undefined,
-      remotes: moduleFederationRegisterApps(appsConfig),
-      shared,
-    }),
+    moduleFederation(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
