@@ -2,6 +2,7 @@ import { Person, UserGeneric } from 'types/user/Person'
 
 export interface UserState {
   token: string
+  redirectAuth: string
   pessoa?: Person
   deseg?: UserGeneric
   professor?: UserGeneric
@@ -10,7 +11,7 @@ export interface UserState {
 
 export interface UserStoreResponse extends UserState {
   getRegistrationNumber: () => string
-  updateUser: (data: UserState) => void
+  updateUser: (data: UserState, redirectAuth?: string) => void
   resetUser: () => void
 }
 

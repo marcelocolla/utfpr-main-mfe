@@ -1,10 +1,13 @@
 import React from 'react'
 import { Route, RouteProps } from 'react-router-dom'
+import useUserStore from 'shared/utfpr-core-shared-mfe/UserStore'
 
 import { getRoutesMap } from './RoutesMap'
 
 const RoutesApp = (): JSX.Element => {
-  const findRoutes = React.useCallback(() => getRoutesMap(), [])
+  const user = useUserStore?.()
+
+  const findRoutes = React.useCallback(() => getRoutesMap(user?.redirectAuth), [])
 
   const routes = findRoutes()
 
