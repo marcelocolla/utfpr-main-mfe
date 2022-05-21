@@ -1,3 +1,3 @@
 export const SIGN_IN = '/login'
 
-export const PROFILE = '/profile'
+export const PROFILE = '/usuario'
