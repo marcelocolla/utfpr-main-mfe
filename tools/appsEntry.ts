@@ -26,6 +26,13 @@ const appsConfig: ModuleRegisterApps = {
     // url: 'http://localhost:4402/remoteEntry.js', // local
     url: `https://utfpr-solicitation-mfe.${sharedDomain}/remoteEntry.js`,
   },
+  admitMFE: {
+    enabled: true,
+    localName: 'utfpr-admit-mfe',
+    remoteName: 'utfpr_admit_mfe',
+    // url: 'http://localhost:4404/remoteEntry.js', // local
+    url: `https://utfpr-admit-mfe.${sharedDomain}/remoteEntry.js`,
+  },
 }
 
 export default appsConfig
