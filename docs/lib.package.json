@@ -1,0 +1,11 @@
+{
+  "name": "@utfpr/utfpr-lib-ui-react",
+  // ...
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/utfpr/utfpr-lib-ui-react.git"
+  },
+  "publishConfig": {
+    "@utfpr:registry": "https://gitlab.com/api/v4/projects/1234/packages/npm/"
+  }
+}
