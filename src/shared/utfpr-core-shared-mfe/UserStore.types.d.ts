@@ -2,7 +2,7 @@ import { Person, UserGeneric } from 'types/user/Person'
 
 export interface UserState {
   token: string
-  redirectAuth: string
+  redirectAuth?: string
   pessoa?: Person
   deseg?: UserGeneric
   professor?: UserGeneric

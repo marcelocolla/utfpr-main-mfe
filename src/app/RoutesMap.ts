@@ -1,15 +1,15 @@
-import React from 'react'
+import { lazy } from 'react'
 import { RouteProps } from 'react-router-dom'
 
 import { SIGN_IN, PROFILE, SOLICITATION, ADMIT, VISITOR } from 'constants/routes'
 
-const LoginPageLazy = React.lazy(() => import('pages/Login'))
-const ProfileRoutesLazy = React.lazy(() => import('shared/utfpr-profile-mfe/ProfileRoutes'))
-const SolicitationRoutesLazy = React.lazy(
+const LoginPageLazy = lazy(() => import('pages/Login'))
+const ProfileRoutesLazy = lazy(() => import('shared/utfpr-profile-mfe/ProfileRoutes'))
+const SolicitationRoutesLazy = lazy(
   () => import('shared/utfpr-solicitation-mfe/SolicitationRoutes'),
 )
-const AdmitRoutesLazy = React.lazy(() => import('shared/utfpr-admit-mfe/AdmitRoutes'))
-const VisitorRoutesLazy = React.lazy(() => import('shared/utfpr-visitor-mfe/VisitorRoutes'))
+const AdmitRoutesLazy = lazy(() => import('shared/utfpr-admit-mfe/AdmitRoutes'))
+const VisitorRoutesLazy = lazy(() => import('shared/utfpr-visitor-mfe/VisitorRoutes'))
 
 export const getRoutesMap = (redirectAuth = SIGN_IN): RouteProps[] => {
   const authRoutes = ['/', SIGN_IN]

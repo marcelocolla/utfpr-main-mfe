@@ -6,7 +6,7 @@ import useUserStore from 'shared/utfpr-core-shared-mfe/UserStore'
 import { PROFILE } from 'constants/routes'
 import { SignInForm } from 'types/signIn'
 import { FormSignInFields } from 'components/FormSignInFields'
-import { signIn } from 'services/signIn/signInService'
+import { signIn } from 'services/signIn'
 
 import { SignInSchema } from './FormSignIn.schema'
 
