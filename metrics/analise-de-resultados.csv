@@ -1,0 +1,16 @@
+Arquivo,Manutenibilidade,Ciclomatico,Sloc_logico,Sloc_fisico,Dificuldade,Esforco,Duracao,Numero_Linhas
+app/MainApp.js,100,1,2,20,6.3,829.62,46.09,31
+components/FormSignIn/FormSignIn.js,68.271,1,16,37,11.4,7104.854,394.714,111
+components/FormSignIn/FormSignIn.schema.js,75.584,1,3,7,7.2,1101.063,61.17,36
+components/FormSignIn/index.js,100,1,0,2,1,4.755,0.264,3
+components/FormSignInFields/FormSignInFields.js,92.418,1,2,33,5.667,1443.809,80.212,53
+components/FormSignInFields/index.js,100,1,0,2,1,4.755,0.264,3
+components/Logo/Logo.js,84.755,1,3,24,6.525,1236.235,68.68,39
+components/Logo/index.js,100,1,0,2,1,4.755,0.264,3
+pages/Login/LoginPage.js,98.268,1,2,20,7.143,1342.739,74.597,41
+pages/Login/index.js,100,1,0,2,1.5,23.265,1.292,6
+pages/NotFound/NotFoundPage.js,83.114,1,6,19,5.769,809.022,44.946,31
+pages/NotFound/index.js,100,1,0,2,1.5,23.265,1.292,6
+services/httpClient.js,70.919,2,5,11,6.286,963.268,53.515,33
+services/signIn/index.js,100,1,0,2,1.5,15,0.833,5
+services/signIn/signInService.js,70.519,1,8,12,9.9,1434.97,79.721,33
