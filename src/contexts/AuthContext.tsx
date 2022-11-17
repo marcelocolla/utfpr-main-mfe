@@ -1,109 +1,107 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import React, { createContext, ReactNode, useEffect, useState } from 'react'
 
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie'
 
-import history from "../history";
+import history from '../history'
 
-import { api } from "../services/api";
+import { api } from '../services/api'
+import { AxiosError, AxiosResponse } from 'axios'
 
 type SignInCredentials = {
-  email: string;
-  password: string;
-};
+  email: string
+  password: string
+}
 
 type AuthContextData = {
-  error: any;
-  loading: boolean;
-  user: User | undefined;
-  isAuthenticated: boolean;
-  signIn(credentials: SignInCredentials): Promise<void>;
-  signOut: () => void;
-};
+  error: any
+  loading: boolean
+  user: User | undefined
+  isAuthenticated: boolean
+  signIn(credentials: SignInCredentials): Promise<void>
+  signOut: () => void
+}
 
 type AuthProviderProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 type Pessoa = {
-  email: string;
-  id_pessoa: number;
-  nome_pessoa: string;
-  tipo_usuario: number;
-};
+  email: string
+  id_pessoa: number
+  nome_pessoa: string
+  tipo_usuario: number
+}
 
 type Deseg = {
-  id_deseg: number;
-  matricula: number;
-};
+  id_deseg: number
+  matricula: number
+}
 
 type Professor = {
-  nome: string;
-  matricula: string;
-  codigo_barra: string;
-  id_professor: number;
-  id_departamento: number;
-};
+  nome: string
+  matricula: string
+  codigo_barra: string
+  id_professor: number
+  id_departamento: number
+}
 
 type Vigilante = {
-  matricula: string;
-};
+  matricula: string
+}
 
 type User = {
-  pessoa: Pessoa;
-  deseg?: Deseg;
-  professor?: Professor;
-  vigilante?: Vigilante;
-};
+  pessoa: Pessoa
+  deseg?: Deseg
+  professor?: Professor
+  vigilante?: Vigilante
+}
 
-export const AuthContext = createContext({} as AuthContextData);
+export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<User | undefined>();
-  const [isAuthenticated, setIsAuthenticated] = useState(!!user);
+  const [error, setError] = useState<AxiosError>()
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState<User | undefined>()
+  const [isAuthenticated, setIsAuthenticated] = useState(!!user)
 
   useEffect(() => {
-    const token = Cookies.get("utfprio.token");
+    const token = Cookies.get('utfprio.token')
 
     if (token) {
-      setIsAuthenticated(true);
-      api.defaults.headers.Autorization = `Bearer ${token}`;
-      api.defaults.headers.authentication = `${token}`;
+      setIsAuthenticated(true)
+      api.defaults.headers.Autorization = `Bearer ${token}`
+      api.defaults.headers.authentication = `${token}`
 
       api
-        .post("auth/me")
-        .then((response) => {
-          const { deseg, pessoa, professor, vigilante } = response.data.data;
+        .post('auth/me')
+        .then((response: AxiosResponse) => {
+          const { deseg, pessoa, professor, vigilante } = response.data.data
 
           if (deseg) {
-            setUser({ pessoa, deseg });
+            setUser({ pessoa, deseg })
           }
 
           if (professor) {
-            setUser({ pessoa, professor });
+            setUser({ pessoa, professor })
           }
 
           if (vigilante) {
-            setUser({ pessoa, vigilante });
+            setUser({ pessoa, vigilante })
           }
         })
         .catch(() => {
-          setIsAuthenticated(false);
-          Cookies.remove("utfprio.token");
-          history.push("/login");
-        });
+          setIsAuthenticated(false)
+          Cookies.remove('utfprio.token')
+          history.push('/login')
+        })
     }
-    setLoading(false);
-  }, []);
+    setLoading(false)
+  }, [])
 
-  async function addProfessor(
-    { email, password }: SignInCredentials,
-    professor: Professor
-  ) {
+  async function addProfessor({ email, password }: SignInCredentials, professor: Professor) {
     try {
       await api
-        .post("professor", {
+        .post('professor', {
           nome_pessoa: professor.nome,
           email,
           tipo_usuario: 0,
@@ -114,48 +112,52 @@ export function AuthProvider({ children }: AuthProviderProps) {
           senha: password,
         })
         .then(() => {
-          signIn({ email, password });
-        });
-    } catch (error) {}
+          signIn({ email, password })
+        })
+    } catch (error) {
+      // --
+    }
   }
 
   async function signIn({ email, password }: SignInCredentials) {
     try {
-      const response = await api.post("auth/authenticate", {
+      const response = await api.post('auth/authenticate', {
         email,
         senha: password,
-      });
+      })
 
-      const token = response.data.token;
+      const token = response.data.token
 
-      const { deseg, pessoa, professor, vigilante } = response.data;
+      const { deseg, pessoa, professor, vigilante } = response.data
 
       if (deseg) {
-        setUser({ pessoa, deseg });
+        setUser({ pessoa, deseg })
       }
 
       if (professor) {
-        setUser({ pessoa, professor });
+        setUser({ pessoa, professor })
       }
 
       if (vigilante) {
-        setUser({ pessoa, vigilante });
+        setUser({ pessoa, vigilante })
       }
 
-      setIsAuthenticated(true);
+      setIsAuthenticated(true)
 
-      Cookies.set("utfprio.token", token, { expires: 1 });
+      Cookies.set('utfprio.token', token, { expires: 1 })
 
-      api.defaults.headers["Autorization"] = `Bearer ${token}`;
+      api.defaults.headers['Autorization'] = `Bearer ${token}`
 
-      history.push("/");
+      history.push('/')
     } catch (error) {
+      const err = error as AxiosError
+
       // erro 401 pode ser login ou senha incorreta
-      if (error.response.status === 401) {
-        const errorData = error.response.data;
+      if (err.response?.status === 401) {
+        const errorData = err.response.data
 
         // No caso de professor não cadastrado, adicionar um novo professor
-        if (errorData.retorno === "Professor não cadastrado") {
+        if (errorData.retorno === 'Professor não cadastrado') {
           addProfessor(
             { email, password },
             {
@@ -164,25 +166,24 @@ export function AuthProvider({ children }: AuthProviderProps) {
               nome: errorData.usuario.name,
               codigo_barra: errorData.usuario.barcode + errorData.usuario.digit,
               matricula: errorData.usuario.code,
-            }
-          );
+            },
+          )
         }
       }
-      setError(error);
+
+      setError(err)
     }
   }
 
   function signOut() {
-    setIsAuthenticated(false);
-    Cookies.remove("utfprio.token");
-    history.push("/login");
+    setIsAuthenticated(false)
+    Cookies.remove('utfprio.token')
+    history.push('/login')
   }
 
   return (
-    <AuthContext.Provider
-      value={{ signIn, user, isAuthenticated, loading, error, signOut }}
-    >
+    <AuthContext.Provider value={{ signIn, user, isAuthenticated, loading, error, signOut }}>
       {children}
     </AuthContext.Provider>
-  );
+  )
 }
