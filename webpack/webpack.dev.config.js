@@ -4,8 +4,5 @@ import { webpackConfigDev } from '@utfprfabricadesoftware/utfpr-tools-react';
 import commonConfig from './webpack.common';
 import envLocal from '../tools/environment';
 const port = 3300;
-const devConfig = {
-    ...webpackConfigDev(port),
-    plugins: [new EnvironmentPlugin(envLocal), new HotModuleReplacementPlugin()],
-};
+const devConfig = Object.assign(Object.assign({}, webpackConfigDev(port)), { plugins: [new EnvironmentPlugin(envLocal), new HotModuleReplacementPlugin()] });
 export default merge(commonConfig, devConfig);
