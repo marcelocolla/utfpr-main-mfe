@@ -3,7 +3,7 @@ interface EnvironmentType {
 }
 
 const environment: EnvironmentType = {
-  REACT_APP_API_URL: 'https://utf-io-staging.herokuapp.com',
+  REACT_APP_API_URL: 'https://utf-io-staging.onrender.com',
   REACT_APP_SHARED_DOMAIN: 'netlify.app',
 }
 
